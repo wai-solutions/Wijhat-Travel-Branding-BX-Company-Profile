@@ -747,8 +747,8 @@ const cz=document.getElementById('canyonZoom'),canyon=document.getElementById('p
 let lastY=scrollY,ticking=false;
 
 function countUp(el){
-  const n=+el.dataset.count,suf=el.dataset.suf||'',t0=performance.now(),dur=1600;
-  (function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e)+suf;if(p<1)requestAnimationFrame(step)})(t0);
+  const n=+el.dataset.count,suf=el.dataset.suf||'',t0=performance.now(),dur=1600,run=el._run=(el._run||0)+1;
+  (function step(t){if(run!==el._run)return;const p=Math.min(1,Math.max(0,(t-t0)/dur)),e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e)+suf;if(p<1)requestAnimationFrame(step)})(t0);
 }
 function update(){
   ticking=false;
@@ -780,7 +780,10 @@ function update(){
   /* reveals */
   for(const el of rvs){if(el.classList.contains('in'))continue;const r=el.getBoundingClientRect();if(r.top<vh*.9&&r.bottom>0)el.classList.add('in')}
   /* counters */
-  for(const c of counters){if(c._done)continue;const r=c.getBoundingClientRect();if(r.top<vh*.85&&r.bottom>0){c._done=true;if(!reduce)countUp(c)}}
+  /* counters: replay every time a number scrolls into view, from above or below */
+  for(const c of counters){const r=c.getBoundingClientRect(),inView=r.top<vh*.9&&r.bottom>vh*.1;
+    if(inView&&!c._done){c._done=true;if(!reduce)countUp(c)}
+    else if(c._done&&(r.bottom<0||r.top>vh)){c._done=false;c._run=(c._run||0)+1;c.textContent='0'+(c.dataset.suf||'')}}
   /* process */
   const pr=proc.getBoundingClientRect(),pp=Math.max(0,Math.min(1,-pr.top/(pr.height-vh)));
   jp.style.strokeDashoffset=L*(1-pp);
