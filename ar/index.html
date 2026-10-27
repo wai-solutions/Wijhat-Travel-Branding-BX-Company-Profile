@@ -531,7 +531,7 @@ h2 em{font-size:1.14em}
               <text class="lbl arc-src" data-arc="b2" font-size="22" fill="#b3628a" text-anchor="middle">الهوية والتجربة</text></g>
             <g class="r1"><circle class="ring" cx="300" cy="300" r="176" fill="none" stroke="#7c2452" stroke-width="2"/>
               <text class="lbl arc-src" data-arc="t1" font-size="20" fill="#9c3a6b" text-anchor="middle">نرى أبعد</text>
-              <text class="lbl arc-src" data-arc="b1" font-size="18" fill="#9c3a6b" text-anchor="middle">العلامة التجارية والاستراتيجية</text></g>
+              <text class="lbl arc-src" data-arc="b1" font-size="18" fill="#9c3a6b" text-anchor="middle">الموقع الاستراتيجي للبراند</text></g>
             <circle cx="300" cy="300" r="94" fill="none" stroke="url(#core)" stroke-width="20"/>
             <g id="coreDot" style="transform-origin:300px 300px"><circle cx="300" cy="206" r="6" fill="#fff"/></g>
             <circle class="hit" data-r="3" cx="300" cy="300" r="270" stroke-width="50" tabindex="0" role="button" aria-label="ننمو معًا"/>
@@ -807,7 +807,7 @@ hero.addEventListener('pointerleave',()=>{hm.style.transform='';tvx=.5;tvy=.62})
 
 /* ---------- rings interaction ---------- */
 const rings=document.getElementById('rings'),cap=document.getElementById('ringCap');
-const RC={1:['نرى أبعد · المرحلة 1','العلامة التجارية والاستراتيجية: الفهم وتحديد الاتجاه','#p1'],2:['نبني أفضل · المرحلة 2','الهوية والتجربة: التصميم والتطوير','#p2'],3:['ننمو معًا · المرحلة 3','التوسّع والاستدامة: الإطلاق والتطوير المستمر','#p3']};
+const RC={1:['نرى أبعد · المرحلة 1','الموقع الاستراتيجي للبراند: الفهم وتحديد الاتجاه','#p1'],2:['نبني أفضل · المرحلة 2','الهوية والتجربة: التصميم والتطوير','#p2'],3:['ننمو معًا · المرحلة 3','التوسّع والاستدامة: الإطلاق والتطوير المستمر','#p3']};
 rings.querySelectorAll('.hit').forEach(h=>{
   const k=h.dataset.r,on=()=>{rings.dataset.active=k;cap.innerHTML=`<b>${RC[k][0]}</b>${RC[k][1]}`};
   h.addEventListener('pointerenter',on);h.addEventListener('focus',on);
